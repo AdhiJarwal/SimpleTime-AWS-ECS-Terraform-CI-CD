@@ -4,7 +4,7 @@ terraform {
     key            = "terraform/resource/terraform.tfstate"
     region         = "ap-south-1"
     encrypt        = true
-    use_lock_file  = true               
+    use_lockfile  = true               
     dynamodb_table = "adhi-service-table"
   }
 }
