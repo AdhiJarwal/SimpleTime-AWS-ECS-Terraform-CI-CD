@@ -61,5 +61,16 @@ variable "task_memory" {
 variable "app_count" {
   description = "Number of Docker containers to run"
   type        = number
-  default     = 2
+  default     = 1
+}
+
+variable "s3_bucket" {
+  description = "S3 bucket for Terraform state"
+  type        = string  
+}
+
+variable "dynamodb_table" {
+  description = "DynamoDB table for state locking"
+  type        = string  
+  
 }
