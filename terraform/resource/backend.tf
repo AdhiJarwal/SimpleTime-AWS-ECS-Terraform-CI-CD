@@ -1,9 +1,10 @@
 terraform {
   backend "s3" {
     bucket         = "adhi-service"
-    key = "terraform/resource/terraform.tfstate"
-    region         = "ap-south-1"                            
+    key            = "terraform/resource/terraform.tfstate"
+    region         = "ap-south-1"
+    encrypt        = true
+    use_lock_file  = true               
     dynamodb_table = "adhi-service-table"
-    encrypt        = true                                   
   }
 }
