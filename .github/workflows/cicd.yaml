@@ -33,8 +33,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: .                # Use the root directory for build context
-          file: ./app/Dockerfile     # Correct path to Dockerfile inside the 'app' folder
+          context: .               
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/simpletimeservice:latest
 
