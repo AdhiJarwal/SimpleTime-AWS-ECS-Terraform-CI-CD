@@ -2,7 +2,6 @@ from flask import Flask, request, jsonify
 from datetime import datetime
 import logging
 
-# Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 

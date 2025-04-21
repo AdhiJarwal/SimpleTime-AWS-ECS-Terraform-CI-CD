@@ -1,10 +1,10 @@
-name: Destroy Infrastructure
+name: SimpleTimeService - Cleanup Infrastructure
 
 on:
   workflow_dispatch:
 
 jobs:
-  terraform-destroy:    # Changed from 'destroy'
+  terraform-destroy:   
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code

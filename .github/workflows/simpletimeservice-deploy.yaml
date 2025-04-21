@@ -1,4 +1,4 @@
-name: CI/CD Pipeline
+name: SimpleTimeService - Build and Deploy
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  docker-build-push:    # Changed from 'build'
+  docker-build-push: 
     runs-on: ubuntu-latest
     
     steps:
@@ -50,9 +50,9 @@ jobs:
           rm -rf /tmp/.buildx-cache
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
 
-  terraform-apply:    # Changed from 'apply-terraform'
+  terraform-apply:   
     runs-on: ubuntu-latest
-    needs: docker-build-push    # Make sure to update this reference
+    needs: docker-build-push   
     steps:
       - name: Checkout code
         uses: actions/checkout@v3

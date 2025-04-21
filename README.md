@@ -3,27 +3,42 @@
 This repository contains Terraform configurations for setting up AWS services, including ECS, VPC, S3, and more. The setup is modular, with separate modules for various components like ECS clusters, VPC setup, and logging.
 
 ## Directory Structure
+
+```
 DEVOPS-CHALLENGE
-├── app.py
-├── Dockerfile
-├── requirements.txt
+├── .github
+│   ├── workflows
+│   │   ├── README.md
+│   │   ├── simpletimeservice-deploy.yaml
+│   │   ├── simpletimeservice-destroy.yaml
+├── app
+│   ├── app.py
+│   ├── Dockerfile
+│   ├── README.md
+│   ├── requirements.txt
 ├── terraform
 │   ├── modules
 │   │   ├── ecs
 │   │   │   ├── main.tf
 │   │   │   ├── outputs.tf
+│   │   │   ├── README.md
 │   │   │   └── variables.tf
 │   │   └── vpc
 │   │       ├── main.tf
 │   │       ├── outputs.tf
+│   │       ├── README.md
 │   │       └── variables.tf
-│   └── resource
-│       ├── main.tf
-│       ├── outputs.tf
-│       ├── providers.tf
-│       ├── terraform.tfvars
-│       └── variables.tf
+│   ├── resource
+│   │   ├── backend.tf
+│   │   ├── main.tf
+│   │   ├── outputs.tf
+│   │   ├── providers.tf
+│   │   ├── README.md
+│   │   ├── terraform.tfvars
+│   │   └── variables.tf
+│   └── README.md
 
+```
 
 ## Modules Overview
 
@@ -34,11 +49,9 @@ DEVOPS-CHALLENGE
 ### `vpc-subnet-sg`
 - **Purpose**: Creates a VPC along with its networking components like public/private subnets and security groups.
 
-### `s3-bucket`
-- **Purpose**: Creates an S3 bucket for storage needs.
-
 ## Root Directory (`resource/`)
 
+- **`backend.tf`**: Configures remote state storage in an S3 bucket with state locking using DynamoDB.
 - **`main.tf`**: Main entry point that calls the modules.
 - **`provider.tf`**: Configures AWS provider settings.
 - **`variables.tf`**: Defines input variables for the entire infrastructure.
