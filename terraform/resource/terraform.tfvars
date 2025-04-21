@@ -9,5 +9,3 @@ container_port       = 8080
 task_cpu             = 256
 task_memory          = 512
 app_count            = 1
-s3_bucket = "adhi-service"
-dynamodb_table = "adhi-service-table"
