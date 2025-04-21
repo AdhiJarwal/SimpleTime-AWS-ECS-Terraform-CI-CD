@@ -7,10 +7,21 @@ on:
   pull_request:
     branches:
       - main
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Action to perform (apply/destroy)'
+        required: true
+        default: 'apply'
+        type: choice
+        options:
+          - apply
+          - destroy
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    if: github.event.inputs.action != 'destroy'  # Skip build if destroying
     
     steps:
       - name: Checkout code
@@ -50,9 +61,10 @@ jobs:
           rm -rf /tmp/.buildx-cache
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
 
-  apply-terraform:
+  terraform:
     runs-on: ubuntu-latest
-    needs: build
+    needs: [build]
+    if: always() # This ensures this job runs even if build is skipped
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -65,12 +77,18 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ap-south-1  # Explicitly specified region
+          aws-region: ap-south-1
 
       - name: Terraform init
         working-directory: ./terraform/resource
         run: terraform init
 
+      - name: Terraform destroy
+        if: github.event.inputs.action == 'destroy'
+        working-directory: ./terraform/resource
+        run: terraform destroy -auto-approve
+
       - name: Terraform apply
+        if: github.event.inputs.action != 'destroy'
         working-directory: ./terraform/resource
         run: terraform apply -auto-approve
