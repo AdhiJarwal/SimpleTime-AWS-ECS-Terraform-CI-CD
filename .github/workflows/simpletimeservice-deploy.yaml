@@ -1,4 +1,4 @@
-name: SimpleTimeService - Build and Deploy
+name: SimpleTimeService - Build and Deploy Infrastructure
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  docker-build-push: 
+  docker-build-and-push-image: 
     runs-on: ubuntu-latest
     
     steps:
@@ -50,9 +50,9 @@ jobs:
           rm -rf /tmp/.buildx-cache
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
 
-  terraform-apply:   
+  terraform-apply-infrastructure:   
     runs-on: ubuntu-latest
-    needs: docker-build-push   
+    needs: docker-build-and-push-image   
     steps:
       - name: Checkout code
         uses: actions/checkout@v3

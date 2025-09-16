@@ -86,7 +86,7 @@ Triggered on:
 - Pull Request to `main`
 
 Jobs:
--  `docker-build-push`: Builds Docker image and pushes to DockerHub
+-  `docker-build-and-push-image`: Builds Docker image and pushes to DockerHub
 -  `terraform-apply`: Provisions AWS infrastructure and deploys app
 
 #### 2. **Destroy Infra** → `.github/workflows/simpletimeservice-destroy.yaml`
